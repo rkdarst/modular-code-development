@@ -356,3 +356,7 @@ my_dog = Pet(name='Pluto', hunger=0)
 my_dog = go_for_a_walk(my_dog)
 print(my_dog.hunger)
 ```
+
+---
+
+# Discussion
