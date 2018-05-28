@@ -110,6 +110,22 @@ get_bmi()
 
 ---
 
+## Memoization
+
+- *Memoization* is an example of a computer science trick that you can do on pure functions
+- A pure function depends only on it's parameters
+- &rarr; it can be replaced by it's return value
+
+Example: you wrote a function to evaluate pi to arbitary precision. When
+you call your function the first time, the value it returns is stored to
+memory (it's just a floating point number). If your loop calls the
+pi-function 10000 times in a loop the value is merely looked up.
+
+Why would this not work on impure functions?
+
+
+---
+
 ## Recommendations
 
 - I/O is impure
