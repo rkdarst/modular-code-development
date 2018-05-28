@@ -161,6 +161,47 @@ Why would this not work on impure functions?
 
 ---
 
+## Plan in pairs
+
+- Break down brewing a cup of coffee (on a regular machine, not an espresso
+  machine) into simple instructions
+  - Take coffee from cupboard
+  - Open coffee container
+  - Measure coffee into coffee machine
+  - ...
+- When you are determining the level of abstraction and wording think a little bit about
+  the fact that you might need to do other kitchen tasks later
+  - don't think too hard at this stage
+  
+### Write down your steps in a document
+
+---
+
+## Plan in pairs part 2
+
+- Break down making a peanut butter and jelly sandwich
+  - Take bread from cupboard
+  - Take peanut butter from cupboard
+  - ...
+
+### Write down the steps in the same document
+
+---
+
+## Decompose what you planned
+
+- Go through your steps
+- Identify steps that look the same or might be implemented by a single
+  *function*
+  - Remember the rule of 3
+- if you are familiar with Object-oriented programming you can start thinking
+  about what you would express as classes but this is not necessary
+- Write down the independent functions and what they would take as parameters
+  - Can you group them into logically separate groups?
+
+
+---
+
 ## Encapsulation
 
 - Hide internals by language or by convention (header file in C/C++,
