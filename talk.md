@@ -6,15 +6,16 @@ class: middle, inverse
 
 # Modular code development
 
-## [Radovan Bast](http://bast.fr)
+## Jyry Suvilehto
 
-### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
+### [NeIC](https://neic.nordforsk.org)/ [CSC - IT Center for Science](https://www.csc.fi)
 
 Text is free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 Code examples: [MIT license](http://opensource.org/licenses/mit-license.html)
 
-Credits: [Jonas Juselius](https://github.com/juselius),
+Credits: [Radovan Bast](http://bast.fr)
+         [Jonas Juselius](https://github.com/juselius),
          [Roberto Di Remigio](http://totaltrash.xyz),
          [Ole Martin Bjørndalen](https://github.com/olemb)
 
@@ -110,6 +111,22 @@ get_bmi()
 
 ---
 
+## Memoization
+
+- *Memoization* is an example of a computer science trick that you can do on pure functions
+- A pure function depends only on it's parameters
+- &rarr; it can be replaced by it's return value
+
+Example: you wrote a function to evaluate pi to arbitary precision. When
+you call your function the first time, the value it returns is stored to
+memory (it's just a floating point number). If your loop calls the
+pi-function 10000 times in a loop the value is merely looked up.
+
+Why would this not work on impure functions?
+
+
+---
+
 ## Recommendations
 
 - I/O is impure
@@ -142,6 +159,47 @@ get_bmi()
   - if a function gets too long
   - if a function does more than one thing
   - if you find it hard to name a function
+
+---
+
+## Plan in pairs
+
+- Break down brewing a cup of coffee (on a regular machine, not an espresso
+  machine) into simple instructions
+  - Take coffee from cupboard
+  - Open coffee container
+  - Measure coffee into coffee machine
+  - ...
+- When you are determining the level of abstraction and wording think a little bit about
+  the fact that you might need to do other kitchen tasks later
+  - don't think too hard at this stage
+  
+### Write down your steps in a document
+
+---
+
+## Plan in pairs part 2
+
+- Break down making a peanut butter and jelly sandwich
+  - Take bread from cupboard
+  - Take peanut butter from cupboard
+  - ...
+
+### Write down the steps in the same document
+
+---
+
+## Decompose what you planned
+
+- Go through your steps
+- Identify steps that look the same or might be implemented by a single
+  *function*
+  - Remember the rule of 3
+- if you are familiar with Object-oriented programming you can start thinking
+  about what you would express as classes but this is not necessary
+- Write down the independent functions and what they would take as parameters
+  - Can you group them into logically separate groups?
+
 
 ---
 
@@ -340,3 +398,7 @@ my_dog = Pet(name='Pluto', hunger=0)
 my_dog = go_for_a_walk(my_dog)
 print(my_dog.hunger)
 ```
+
+---
+
+# Discussion
