@@ -6,15 +6,16 @@ class: middle, inverse
 
 # Modular code development
 
-## [Radovan Bast](http://bast.fr)
+## Jyry Suvilehto
 
-### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
+### [NeIC](https://neic.nordforsk.org)/ [CSC - IT Center for Science](https://www.csc.fi)
 
 Text is free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 Code examples: [MIT license](http://opensource.org/licenses/mit-license.html)
 
-Credits: [Jonas Juselius](https://github.com/juselius),
+Credits: [Radovan Bast](http://bast.fr)
+         [Jonas Juselius](https://github.com/juselius),
          [Roberto Di Remigio](http://totaltrash.xyz),
          [Ole Martin Bjørndalen](https://github.com/olemb)
 
