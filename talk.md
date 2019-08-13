@@ -7,8 +7,6 @@ class: middle, inverse
 
 ## Richard Darst from original material by [Radovan Bast](http://bast.fr)
 
-### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
-
 Text is free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 Code examples: [MIT license](http://opensource.org/licenses/mit-license.html)
@@ -19,18 +17,23 @@ Credits: [Jonas Juselius](https://github.com/juselius),
 
 ---
 
+layout: false
+
 ## Modularity...
 
 Do you want to use your stuff twice or more?
 
 Or does reinventing the wheel every time sound fun?
 
+And do you want to spend as long understanding your code as you spent
+writing it?
+
 Modularity is a primary concept for reusable -and understandable-
 code.
 
 ---
 
-Modularity is not automatic.  There is a cost, and a payoff:
+## Modularity is not automatic.  There is a cost, and a payoff:
 
 <img src="img/development-speed.svg" style="width: 80%;"/>
 
@@ -57,7 +60,7 @@ Modularity is not automatic.  There is a cost, and a payoff:
 
 - Functions
 - Abstraction layers
-- Libraries(packages)
+- Libraries (packages)
 
 ---
 
@@ -65,6 +68,10 @@ Modularity is not automatic.  There is a cost, and a payoff:
 
 A **pure** function has output only a function of input, and no
 side-effects.  Same input, *always* same output.
+
+---
+
+## Functions: pure is better
 
 ### a) pure: no side effects
 
@@ -129,7 +136,7 @@ and to a point.
 ## Abstraction layers
 
 How do you decide what functions to make?  How do functions work
-together?
+together?  How much is too much for one function to do?
 
 These aren't easy questions.
 
@@ -151,15 +158,22 @@ Designing software well is an *art*.
 
 ## Packaging code
 
-You shouldn't have all your code in one palace.
+You shouldn't have all your data/code in one mixed-up directory.
 
-First, divide your stuff into directories with different roles.
-Some may be stable and professional, some may be your daily hacks.
+First, divide your stuff into directories with different roles.  Some
+may be stable and professional, some may be your daily hacks to get
+your work done.
 
-Stable code directories depend on others in a clear manner:
-e.g. `import other_code`.
+My typical directory types:
+- original data
+- daily workspace: code, run scripts, scratch data
+  - usually subdirs of scratch
+- code libraries, more stable
 
-Now how do we do that?
+Daily work depends on code libraries in a clear manner:
+`import other_code`.
+
+Now how do we make stuff importable?
 
 ---
 
@@ -167,13 +181,31 @@ Now how do we do that?
 
 Plenty of tools exist for packaging.  Python has a fairly simple way.
 
-* Make a `setup.py` file
-* Optionally, publish it.
-* Install it, either from PyPI or from your own checkout:
-  - `pip install name`
-  - `pip install git+https://github.com/rkdarst/some-package.git#egg=some-package`
-  - from git dir, `pip install -e`.  Editing the code immediately
-    takes effect, no need to reinstall (good for development)
+* Make ``.py`` files that can be imported (everything in functions)
+* Optionally, distribute it:
+  * Make a `setup.py` file
+  * Publish it to the Python Package Index
+* Install it or directly hotlink it
+
+---
+
+## Importable Python file:
+
+```python
+def function1():
+    ...
+
+def function2():
+    ...
+
+def main():
+    ...
+
+if __name__ = "__main__":
+   # This is run only if it's run as a script directly, not if imported
+   main()
+```
+
 
 ---
 
@@ -208,16 +240,20 @@ From reference and tutorial: https://packaging.python.org/tutorials/packaging-pr
 
 ---
 
-## Making packaged code available:
+## Making packaged code available
 
-* `pip install`
-* `pip install -e` for editable version (changes take effect immediately)
-* setting `PYTHONPATH`
+It's easy to use code that's in another library.
+
+Simple: set `PYTHONPATH` to find your code.
+
+If it's packaged with `setup.py` you can do several things:
+
+- `pip install name`
+- `pip install git+https://github.com/rkdarst/some-package.git#egg=some-package`
+- from git dir, `pip install -e`.  Editing the code immediately
+  takes effect, no need to reinstall (good for development)
 
 ---
-
-
-layout: false
 
 ## Questions
 
