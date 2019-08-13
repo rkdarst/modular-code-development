@@ -5,7 +5,7 @@ class: middle, inverse
 
 # Modular code development
 
-## [Radovan Bast](http://bast.fr)
+## Richard Darst from original material by [Radovan Bast](http://bast.fr)
 
 ### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
 
@@ -19,31 +19,22 @@ Credits: [Jonas Juselius](https://github.com/juselius),
 
 ---
 
-layout: false
+## Modularity...
 
-## Questions
+Do you want to use your stuff twice or more?
 
-- What best practices can you recommend to arrive at well structured, modular
-  code in your favourite programming language?
-- What would you recommend your colleague who starts in the same programming language?
-- How do you deal with code complexity in your projects?
+Or does reinventing the wheel every time sound fun?
 
-### First some food for thought ...
+Modularity is a primary concept for reusable -and understandable-
+code.
 
 ---
 
-class: center, middle, inverse
-
-## Who is the audience that will read your code?
-
-## - Machines
-## - People
-
----
+Modularity is not automatic.  There is a cost, and a payoff:
 
 <img src="img/development-speed.svg" style="width: 80%;"/>
 
-Discuss whether you agree or not and what "properly" means.
+**Discuss:** do you agree or not, and what "properly" means.
 
 .cite[Adapted from ["Simple Made Easy" by Rich Hickey](https://www.infoq.com/presentations/Simple-Made-Easy)]
 
@@ -59,36 +50,21 @@ Discuss whether you agree or not and what "properly" means.
 
 .cite[Slide adapted from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity)]
 
----
-
-## Modularity and composition
-
-- .emph[Build complex behavior from simple components]
-- We can reason about the components and the composite
-- Composition is key to managing complexity
-- Modularity does not imply simplicity, but is enabled by it
-
-<img src="img/knit_vs_lego.jpg" style="width: 100%;"/>
-
-.cite[Slide taken from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity)]
 
 ---
 
-## Purity
+## Types of software modularity
 
-- Pure functions have no notion of state: They take input values and return
-  values
-- .emph[Given the same input, a pure function *always* returns the same value]
-- Function calls can be optimized away
-- Pure function == data
-
-<img src="img/bugbarrier.jpg" style="width: 40%;"/>
-
-.cite[Slide taken from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity)]
+- Functions
+- Abstraction layers
+- Libraries(packages)
 
 ---
 
-## Example: pure vs. stateful
+## Functions: pure is better
+
+A **pure** function has output only a function of input, and no
+side-effects.  Same input, *always* same output.
 
 ### a) pure: no side effects
 
@@ -118,8 +94,10 @@ print(temp_c)
 
 ---
 
-## Pure functions are easier to
+## Pure functions are always better
 
+
+Easier to
 - Test
 - Understand
 - Reuse
@@ -128,146 +106,122 @@ print(temp_c)
 - Optimize
 - Compose
 
-### Examples
-
-Mathematical functions:
-
-$$f(x, y) = x - x^2 + x^3 + y^2 + xy$$
-
-$$(f \circ g)(x) = f(g(x))$$
-
-Unix shell:
-
-```shell
-$ cat somefile | grep somestring | sort | uniq | ...
-```
+But not everything can be pure: Reading data is not pure.  Writing
+results is not pure.  But usually the hard part - the science - is
+pure.
 
 ---
 
-## Recommendations
+## Recommendations on functions
+
+Try to separate pure from impure parts, and keep your functions small
+and to a point.
 
 - I/O is impure
 - Keep I/O on the outside and connected
 - Keep the inside of your code pure/stateless
+- Anything that gets too large, split into functions
 
 <img src="img/good-vs-bad.svg" style="width: 100%;"/>
 
 ---
 
-## Divide and conquer
+## Abstraction layers
 
-- Split the code up
-- Construct your program from parts:
-  - functions
-  - modules
-  - packages (Python) or libraries (C or or C++ or Fortran)
+How do you decide what functions to make?  How do functions work
+together?
 
-## Functions, functions, functions
+These aren't easy questions.
 
-- Build your code from functions
-- Break your code down to more functions
-  - if you have too many levels of indentation
-  - if a function gets too long
-  - if a function does more than one thing
-  - if you find it hard to name a function
+But almost all serious software is designed in layers.  Typical
+layers:
 
----
+- input
+- preprocessing
+- transformation
+- analysis
+- output
 
-## Encapsulation
+In general, put similar code in a nearby location (functions close by,
+modules, sub-packages, etc).
 
-- Hide internals by language or by convention (header file in C/C++,
-  public/private in Fortran, underscores in Python)
-- "Python has no locked doors; it's a consenting adults language.
-  If you open the door you're responsible for what you see." [R. Hettinger]
-- Expose the "what", hide the "how"
-
-## Import and export
-
-- Import as little as possible
-- Export as little as possible
+Designing software well is an *art*.
 
 ---
 
-## Simplicity and clarity before elegance before efficiency
+## Packaging code
 
-### Avoid premature optimization
+You shouldn't have all your code in one palace.
 
-- Do not optimize
-- If you have to optimize, optimize later
-- If you have to optimize, measure, do not guess
+First, divide your stuff into directories with different roles.
+Some may be stable and professional, some may be your daily hacks.
 
-### Simple is better than complex
+Stable code directories depend on others in a clear manner:
+e.g. `import other_code`.
 
-- If you cannot understand or explain a function on a cold gray Monday morning before coffee, it is too complex. (Quote adapted from [Pieter Hintjens, Social Architecture, 2009](https://www.gitbook.com/book/hintjens/social-architecture/details))
-- "Only God and I knew": https://twitter.com/farbodsaraf/status/1006215492607111168
-
----
-
-## Formatting and styling
-
-### Python
-
-- Follow [PEP8](https://www.python.org/dev/peps/pep-0008/)
-- Check with pycodestyle
-- Autoformat with https://github.com/google/yapf
-
-### C/C++
-
-- Autoformat with [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html)
-
-### Other languages
-
-- [Please complete this list by sending pull requests]
+Now how do we do that?
 
 ---
 
-## Project layout
+## Packaging tools
 
-- Documentation sources **always** in the same repository as the code! Often under `doc/`.
-- Tests either close to the implementation or in own directory `test/` or `tests/`.
-- Sources under `src/` unless it is a Python package, then under `packagename/`.
-- It is possible to nest Git repositories
-  using [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+Plenty of tools exist for packaging.  Python has a fairly simple way.
 
-### Python
-
-- Collect related functions into modules.
-- Collect related modules into packages.
-
-### Fortran
-
-- One module per file. File name equals module name.
-
-### C/C++
-
-- Separate interface files and implementation files.
-
-### R
-
-- use [devtools](https://github.com/r-lib/devtools) to develop packages
-- [devtools](https://github.com/r-lib/devtools) wraps around packages to generate tests ([testthat](https://github.com/r-lib/testthat)) and documentation ([roxygen2](https://github.com/klutometis/roxygen))
+* Make a `setup.py` file
+* Optionally, publish it.
+* Install it, either from PyPI or from your own checkout:
+  - `pip install name`
+  - `pip install git+https://github.com/rkdarst/some-package.git#egg=some-package`
+  - from git dir, `pip install -e`.  Editing the code immediately
+    takes effect, no need to reinstall (good for development)
 
 ---
 
-## Conclusions
+## Example `setup.py`
 
-- Divide and isolate
-- Introduce tests early
-- .emph[Compose your code out of pure functions]
-- Prefer immutable data structures (fun fact: Git commits are immutable)
-- Do not overuse classes
-- Think about people reading your code, do not ["Write Unmaintainable Code"](https://www.doc.ic.ac.uk/~susan/475/unmain.html)
+```python
+import setuptools
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="example-pkg-your-username",
+    version="0.0.1",
+    author="Example Author",
+    author_email="author@example.com",
+    description="A small example package",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/pypa/sampleproject",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)
+```
+
+From reference and tutorial: https://packaging.python.org/tutorials/packaging-projects/
+
 
 ---
 
-## Discuss in a group
+## Making packaged code available:
+
+* `pip install`
+* `pip install -e` for editable version (changes take effect immediately)
+* setting `PYTHONPATH`
+
+---
+
+
+layout: false
+
+## Questions
 
 - What best practices can you recommend to arrive at well structured, modular
   code in your favourite programming language?
 - What would you recommend your colleague who starts in the same programming language?
 - How do you deal with code complexity in your projects?
-
-### Write down your findings in a shared document
-
-- Later we will discuss these together
-- We can share and discuss our personal experiences
